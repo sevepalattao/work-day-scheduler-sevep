@@ -8,12 +8,15 @@ $(".saveBtn").on("click", function() {
     localStorage.setItem(time, descr);
 });
 
-for (var i= 9; i < 12; i++) {
+var hour = moment().format("H");
+for (var i= 1; i < 18; i++) {
     $("#" + i + "am" + " .description").val(localStorage.getItem(i + "am"));
-}
-
-$("#12pm .description").val(localStorage.getItem("12pm"));
-
-for (var i = 1; i < 6; i++) {
     $("#" + i + "pm" + " .description").val(localStorage.getItem(i + "pm"));
+    if (hour > i) {
+        $("#" + i).addClass("past");
+    } else if (hour == i) {
+        $("#" + i).addClass("present");
+    } else {
+        $("#" + i).addClass("future");
+    }
 }
